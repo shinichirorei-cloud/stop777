@@ -1,3 +1,5 @@
+const SUPABASE_URL = "https://uvkercnxdwhuqqvywgom.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mRS4_JbcszbPr7bYCnWn6g_fONgjJ53";
 const timer = document.getElementById("timer");
 const timerHint = document.getElementById("timerHint");
 
@@ -174,6 +176,7 @@ function showResult(time, difference) {
   lastDifference = difference;
 
   lastRank = rank;
+  savePlayData(time, difference, rank);
   let isNewBest = false;
 
   if (bestDifference === null || difference < bestDifference) {
@@ -309,4 +312,46 @@ function playStopEffect(time, difference) {
     },
     isPerfect ? 1100 : 750,
   );
+}
+async function savePlayData(time, difference, rank) {
+  try {
+    let playerId = localStorage.getItem("playerId");
+
+    if (!playerId) {
+      playerId = crypto.randomUUID();
+      localStorage.setItem("playerId", playerId);
+    }
+
+    const device = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+      ? "mobile"
+      : "desktop";
+
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/plays`, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Prefer: "return=minimal",
+      },
+
+      body: JSON.stringify({
+        player_id: playerId,
+        score: time,
+        error: difference,
+        rank: rank,
+        device: device,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Supabase error:", await response.text());
+      return;
+    }
+
+    console.log("Play data saved!");
+  } catch (error) {
+    console.error("Save error:", error);
+  }
 }
