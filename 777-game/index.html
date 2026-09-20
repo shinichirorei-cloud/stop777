@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>STOP 7.77</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="stopEffect" class="stop-effect">
+      <div id="effectLabel" class="effect-label">STOPPED</div>
+
+      <div id="effectTime" class="effect-time">7.77</div>
+
+      <div id="effectSub" class="effect-sub">SECONDS</div>
+    </div>
+    <main class="game">
+      <header class="header">
+        <div class="logo">STOP <span>7.77</span></div>
+
+        <div class="status">● READY</div>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">TIME SENSE CHALLENGE</p>
+
+        <h1>
+          STOP AT
+          <span>7.77</span>
+        </h1>
+
+        <p class="description">
+          3秒後、時計が消える。<br />
+          感覚だけで <strong>7.77秒</strong> を止めろ。
+        </p>
+      </section>
+
+      <section class="timer-area">
+        <p class="timer-label">ELAPSED TIME</p>
+
+        <div id="timer">0.00</div>
+
+        <p id="timerHint">PRESS START</p>
+      </section>
+
+      <button id="gameButton" class="main-button">START CHALLENGE</button>
+
+      <section id="result" class="result"></section>
+
+      <button id="shareButton" class="share-button">𝕏 SHARE RESULT</button>
+
+      <footer>STOP 7.77 — HOW GOOD IS YOUR TIME SENSE?</footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
